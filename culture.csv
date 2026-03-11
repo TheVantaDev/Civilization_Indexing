@@ -1,0 +1,5 @@
+culture_id,culture_region,ethical_priority,sensitivity_level
+1,South Asia,fairness,High
+2,Europe,privacy,High
+3,East Asia,social harmony,Medium
+4,Global,transparency,High

@@ -1,0 +1,7 @@
+ethics_id,civilization,ethical_principle,domain,weight
+1,Sanatan Dharma,Dharma (Duty & fairness),Justice,0.9
+2,Buddhism,Compassion,Social welfare,0.85
+3,Confucianism,Social harmony,Governance,0.8
+4,Islamic Ethics,Justice (Adl),Law,0.88
+5,Greek Philosophy,Virtue ethics,Personal behavior,0.75
+6,Indigenous Traditions,Environmental stewardship,Sustainability,0.92
