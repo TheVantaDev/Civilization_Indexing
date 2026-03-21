@@ -60,3 +60,19 @@ PrincipleNode* load_ethics(const char *filename) {
     fclose(fp);
     return root;
 }
+
+static void free_behavior_list(BehaviorNode *head) {
+    while (head) {
+        BehaviorNode *next=head->next;
+        free(head);
+        head=next;
+    }
+}
+
+void free_ethics_tree(PrincipleNode *root) {
+    if (!root) return;
+    free_ethics_tree(root->left);
+    free_ethics_tree(root->right);
+    free_behavior_list(root->behaviors);
+    free(root);
+}

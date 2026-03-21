@@ -31,9 +31,34 @@ typedef struct Culture {
     char sensitivity[16];    // "High"/"Medium"/"Low"
 } Culture;
 
+typedef struct AISystem {
+    int ai_system_id;
+    char system_name[128];
+    char application_domain[128];
+    char developer[128];
+    char deployment_region[64];
+} AISystem;
+
+typedef struct RiskSummary {
+    char risk_category[64];
+    char risk_level[16];
+    double score;            // 0.0 to 1.0
+} RiskSummary;
+
 // Function declarations
 PrincipleNode* find_principle(PrincipleNode *root, const char *principle);
 PrincipleNode* insert_principle(PrincipleNode *root, PrincipleNode *node);
 PrincipleNode* create_principle(int id, const char *civ, const char *principle, const char *domain, double weight);
+
+PrincipleNode* load_ethics(const char *filename);
+int load_cultures(const char *filename, Culture *arr, int max);
+void load_behaviors(const char *filename, PrincipleNode *ethics_root);
+void free_ethics_tree(PrincipleNode *root);
+
+double compute_principle_alignment_for_ai(PrincipleNode *root, int ai_id, const char *principle_name);
+double compute_alignment_for_ai(PrincipleNode *root, int ai_id);
+double compute_culture_compatibility_for_ai(PrincipleNode *root, int ai_id, const Culture *culture);
+double compute_overall_cultural_compatibility(PrincipleNode *root, int ai_id, const Culture *cultures, int culture_count);
+int evaluate_risks_for_ai(PrincipleNode *root, int ai_id, RiskSummary *out, int max_out);
 
 #endif

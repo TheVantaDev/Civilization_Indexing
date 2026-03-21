@@ -24,6 +24,7 @@ This system implements a tree-based data structure to organize ethical principle
 ├── scoring.c           # Alignment score computation
 ├── types.h             # Data structure definitions
 ├── ethics.csv          # Ethical principles dataset
+├── ai_systems.csv      # AI system metadata dataset
 ├── culture.csv         # Cultural priorities dataset
 ├── ai_behavior.csv     # AI system behavior records
 └── README.md           # This file
@@ -49,6 +50,12 @@ Structure containing cultural information:
 - Priority (e.g., fairness, privacy)
 - Sensitivity level
 
+### AISystem
+Structure containing AI system metadata:
+- AI system ID and system name
+- Application domain and developer
+- Deployment region
+
 ## Compilation
 
 ### Requirements
@@ -68,20 +75,23 @@ gcc main.c ethics.c culture.c behavior.c scoring.c -o main.exe
 ```
 
 ### Output
-The program generates ethical alignment scores for AI systems:
+The program generates sponsor-aligned ethical intelligence outputs:
 ```
-Loaded 4 cultures.
-AI System 101: Ethical Alignment Score = X.XX
-AI System 102: Ethical Alignment Score = X.XX
-AI System 103: Ethical Alignment Score = X.XX
+1. Intermediate AI scoring table by ethical principle
+2. Cultural compatibility table by region
+3. Ethical risk detection table with risk levels
+4. Final Ethical AI Civilization Index table
+5. Recommendations and projected score improvements
+6. Dashboard summary with global ethics rank
 ```
 
 ## File Descriptions
 
 ### main.c
 - Program entry point
-- Loads ethics principles, cultures, and behaviors
-- Computes and displays alignment scores for AI systems
+- Loads ethics principles, AI metadata, cultures, and behaviors
+- Computes principle-level alignment, culture compatibility, and risk summaries
+- Prints final Ethical AI Civilization Index, recommendations, and dashboard blocks
 
 ### ethics.c
 - `create_principle()`: Create new ethical principle nodes
@@ -95,18 +105,22 @@ AI System 103: Ethical Alignment Score = X.XX
 
 ### behavior.c
 - `create_behavior()`: Create behavior records
-- `attach_behavior_to_principle()`: Link behaviors to ethical principles
+- Rule-based mapping: Link behaviors to relevant ethical principles
 - `load_behaviors()`: Parse AI behavior data from CSV
 
 ### scoring.c
 - `transparency_to_score()`: Convert transparency levels to scores
 - `bias_penalty()`: Apply penalties for biased or rejected outcomes
-- `compute_alignment_for_ai()`: Recursively calculate alignment scores
+- `compute_principle_alignment_for_ai()`: Calculate principle-wise alignment
+- `compute_culture_compatibility_for_ai()`: Calculate region compatibility
+- `evaluate_risks_for_ai()`: Detect risk categories and levels
 
 ### types.h
 - `PrincipleNode`: Binary search tree structure for ethics
 - `BehaviorNode`: Linked list for tracking behaviors
 - `Culture`: Culture information structure
+- `AISystem`: AI metadata structure
+- `RiskSummary`: Risk category and severity output structure
 - Function declarations for module interfaces
 
 ## CSV Data Format
@@ -121,17 +135,25 @@ ethics_id,civilization,ethical_principle,domain,weight
 
 ### culture.csv
 ```
-culture_id,region,priority,sensitivity
+culture_id,culture_region,ethical_priority,sensitivity_level
 1,South Asia,fairness,High
-2,East Asia,harmony,Medium
+2,Europe,privacy,High
+...
+```
+
+### ai_systems.csv
+```
+ai_system_id,system_name,application_domain,developer,deployment_region
+101,HireSmart AI,Recruitment,TechCorp,Global
+102,MedAssist AI,Healthcare diagnosis,HealthTech Labs,Europe
 ...
 ```
 
 ### ai_behavior.csv
 ```
 record_id,ai_system_id,decision_type,affected_group,outcome,transparency
-1,101,hiring,candidates,Approved,High
-2,102,loan_review,applicants,Approved,Medium
+1,101,Candidate screening,Minority applicants,Rejected,Low
+2,101,Candidate ranking,All applicants,Ranked,Medium
 ...
 ```
 
