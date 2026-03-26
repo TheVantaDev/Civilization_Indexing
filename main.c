@@ -409,6 +409,47 @@ int main(void) {
         printf("Warning: failed to write export_dashboard.csv\n");
     }
 
+    // ===== VISUALIZATION SECTION =====
+    printf("\n\n");
+    printf("╔════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                        ASCII VISUALIZATION                                 ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════════════╝\n");
+
+    // Collect data for visualization
+    double ethical_scores[64];
+    double cultural_scores[64];
+    const char *ai_names[64];
+
+    for (i = 0; i < system_count; i++) {
+        ethical_scores[i] = compute_alignment_for_ai(ethics_root, systems[i].ai_system_id);
+        cultural_scores[i] = compute_overall_cultural_compatibility(ethics_root, systems[i].ai_system_id, cultures, culture_count);
+        ai_names[i] = systems[i].system_name;
+    }
+
+    // Print comparison chart
+    print_comparison_chart("AI Systems Ethics Comparison", ai_names, ethical_scores, cultural_scores, overall_scores, system_count);
+
+    // Print risk charts for each AI
+    for (i = 0; i < system_count; i++) {
+        RiskSummary risks[3];
+        int risk_count = evaluate_risks_for_ai(ethics_root, systems[i].ai_system_id, risks, 3);
+        print_risk_chart(systems[i].system_name, risks, risk_count);
+    }
+
+    // Generate HTML Dashboard
+    if (generate_html_dashboard("dashboard.html", systems, ethical_scores, cultural_scores, overall_scores, system_count)) {
+        printf("\n✅ Interactive HTML dashboard generated: dashboard.html\n");
+        printf("   Open this file in your web browser to see interactive charts!\n");
+    } else {
+        printf("\n❌ Failed to generate HTML dashboard\n");
+    }
+
+    // Generate GNUplot script (optional)
+    if (generate_gnuplot_script("plot_ethics.gp", systems, overall_scores, system_count)) {
+        printf("✅ GNUplot script generated: plot_ethics.gp\n");
+        printf("   Run: gnuplot plot_ethics.gp (if you have GNUplot installed)\n");
+    }
+
     free_ethics_tree(ethics_root);
 
     return 0;
