@@ -2,9 +2,90 @@ record_id,ai_system_id,decision_type,affected_group,outcome,transparency
 1,101,Candidate screening,Minority applicants,Rejected,Low
 2,101,Candidate ranking,All applicants,Ranked,Medium
 3,101,Hiring review,Protected group,Biased,Low
-4,102,Diagnosis prediction,Patients,Accurate,High
-5,102,Treatment recommendation,Patients,Personalized,High
-6,102,Triage prioritization,Elderly patients,Fair,Medium
-7,103,Learning recommendation,Students,Personalized,Medium
-8,103,Assessment adaptation,Students,Fair,High
-9,103,Scholarship suggestion,Underrepresented students,Inclusive,Medium
+4,101,Resume parsing,Female applicants,Fair,High
+5,101,Skill assessment,Tech roles,Accurate,Medium
+6,101,Interview scheduling,All candidates,Fair,High
+7,101,Salary recommendation,Women,Biased,Low
+8,101,Culture fit analysis,Diverse candidates,Fair,Medium
+9,101,Reference verification,All applicants,Accurate,High
+10,101,Background check,Minority groups,Fair,Medium
+11,101,Job matching,Senior positions,Biased,Medium
+12,101,Candidate shortlisting,Entry level,Fair,High
+13,101,Technical screening,All applicants,Accurate,High
+14,101,Personality test,Introverts,Fair,Medium
+15,101,Team compatibility,Diverse teams,Inclusive,High
+16,101,Promotion prediction,Women leaders,Biased,Low
+17,101,Retention forecast,Young employees,Accurate,Medium
+18,101,Performance review,All employees,Fair,High
+19,101,Skill gap analysis,Career switchers,Fair,Medium
+20,101,Training recommendation,All employees,Personalized,High
+21,101,Bonus calculation,Remote workers,Fair,Medium
+22,101,Leadership potential,Minority candidates,Biased,Low
+23,101,Peer review analysis,All teams,Accurate,High
+24,101,Exit interview analysis,Departing employees,Fair,Medium
+25,101,Onboarding workflow,New hires,Personalized,High
+26,101,Conflict resolution,Team disputes,Fair,Medium
+27,101,Work-life balance score,Parents,Fair,High
+28,101,Productivity tracking,Remote teams,Accurate,Medium
+29,101,Career path suggestion,Mid-level employees,Personalized,High
+30,101,Recruitment pipeline,All departments,Fair,Medium
+31,102,Diagnosis prediction,Patients,Accurate,High
+32,102,Treatment recommendation,Patients,Personalized,High
+33,102,Triage prioritization,Elderly patients,Fair,Medium
+34,102,Drug interaction check,All patients,Accurate,High
+35,102,Symptom analysis,Chronic illness,Accurate,High
+36,102,Appointment scheduling,Rural patients,Fair,Medium
+37,102,Medical imaging analysis,Cancer screening,Accurate,High
+38,102,Risk assessment,Diabetic patients,Accurate,High
+39,102,Treatment cost estimate,Low income patients,Fair,Medium
+40,102,Emergency classification,All patients,Accurate,High
+41,102,Prescription validation,Elderly,Accurate,High
+42,102,Lab result interpretation,All patients,Accurate,High
+43,102,Vaccination schedule,Children,Personalized,High
+44,102,Mental health screening,Adolescents,Fair,Medium
+45,102,Chronic disease monitoring,Heart patients,Accurate,High
+46,102,Therapy recommendation,Mental health,Personalized,High
+47,102,Allergy detection,All patients,Accurate,High
+48,102,Post-op care plan,Surgery patients,Personalized,High
+49,102,Nutrition advice,Diabetic patients,Personalized,Medium
+50,102,Medication adherence,Elderly,Fair,Medium
+51,102,Telehealth routing,Remote areas,Fair,Medium
+52,102,Clinical trial matching,Cancer patients,Fair,High
+53,102,Pain management,Chronic pain,Personalized,High
+54,102,Genetic risk prediction,Family history,Accurate,Medium
+55,102,Rehabilitation planning,Stroke patients,Personalized,High
+56,102,Preventive care reminder,All patients,Personalized,High
+57,102,Second opinion analysis,Complex cases,Accurate,High
+58,102,Hospital readmission risk,Discharged patients,Accurate,Medium
+59,102,Palliative care planning,Terminal illness,Fair,High
+60,102,Health insurance claim,Low income,Fair,Low
+61,103,Learning recommendation,Students,Personalized,Medium
+62,103,Assessment adaptation,Students,Fair,High
+63,103,Scholarship suggestion,Underrepresented students,Inclusive,Medium
+64,103,Course difficulty adjustment,Struggling students,Fair,High
+65,103,Study resource allocation,All students,Personalized,Medium
+66,103,Exam scheduling,Students with disabilities,Fair,High
+67,103,Career counseling,First generation students,Inclusive,Medium
+68,103,Peer group formation,Diverse classrooms,Fair,High
+69,103,Grade prediction,All students,Accurate,Medium
+70,103,Learning style detection,Neurodivergent students,Fair,High
+71,103,Assignment personalization,Advanced learners,Personalized,High
+72,103,Dropout risk detection,At-risk students,Accurate,Medium
+73,103,Tutoring recommendation,Failing students,Personalized,High
+74,103,Extracurricular matching,All students,Fair,Medium
+75,103,College admission prediction,Low income students,Fair,Low
+76,103,Internship matching,STEM students,Fair,High
+77,103,Language learning path,Non-native speakers,Personalized,High
+78,103,Reading level assessment,Elementary students,Accurate,High
+79,103,Math skill progression,All grades,Personalized,Medium
+80,103,Parent-teacher communication,Struggling students,Fair,High
+81,103,Special education placement,Students with IEP,Fair,Medium
+82,103,Gifted program selection,High achievers,Fair,Low
+83,103,Attendance pattern analysis,All students,Accurate,Medium
+84,103,Behavioral intervention,Disciplinary cases,Fair,Medium
+85,103,Homework difficulty scaling,All students,Personalized,High
+86,103,Test anxiety detection,Anxious students,Accurate,High
+87,103,Social-emotional learning,All students,Personalized,Medium
+88,103,College major recommendation,High school seniors,Personalized,High
+89,103,Financial aid eligibility,Low income families,Fair,Medium
+90,103,Summer program matching,At-risk students,Inclusive,High

@@ -61,4 +61,11 @@ double compute_culture_compatibility_for_ai(PrincipleNode *root, int ai_id, cons
 double compute_overall_cultural_compatibility(PrincipleNode *root, int ai_id, const Culture *cultures, int culture_count);
 int evaluate_risks_for_ai(PrincipleNode *root, int ai_id, RiskSummary *out, int max_out);
 
+// Visualization functions
+void print_ascii_chart(const char *title, const char *labels[], const double values[], int count);
+void print_comparison_chart(const char *title, const char *ai_names[], const double ethical[], const double cultural[], const double overall[], int count);
+void print_risk_chart(const char *ai_name, const RiskSummary risks[], int risk_count);
+int generate_html_dashboard(const char *filename, const AISystem *systems, const double ethical[], const double cultural[], const double overall[], int system_count);
+int generate_gnuplot_script(const char *filename, const AISystem *systems, const double scores[], int system_count);
+
 #endif

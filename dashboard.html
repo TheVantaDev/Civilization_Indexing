@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AI Civilization Ethics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        h1 { color: #333; text-align: center; }
+        .chart-container { width: 80%; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .legend { text-align: center; margin: 10px; font-size: 14px; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>🌍 AI Civilization Ethics Dashboard</h1>
+    <div class="chart-container">
+        <h2>Overall Ethical Scores Comparison</h2>
+        <canvas id="overallChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <h2>Detailed Ethical Metrics</h2>
+        <canvas id="detailedChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <h2>Multi-dimensional Ethics Profile</h2>
+        <canvas id="radarChart"></canvas>
+    </div>
+    <script>
+        const aiSystems = ['HireSmart AI', 'MedAssist AI', 'EduGuide AI'];
+        const ethicalScores = [36.11, 64.40, 61.07];
+        const culturalScores = [40.70, 53.53, 46.33];
+        const overallScores = [42.50, 65.71, 60.36];
+
+        new Chart(document.getElementById('overallChart'), {
+            type: 'bar',
+            data: {
+                labels: aiSystems,
+                datasets: [{
+                    label: 'Overall Ethical Score (%)',
+                    data: overallScores,
+                    backgroundColor: ['#e74c3c', '#3498db', '#2ecc71'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true, max: 100 } }
+            }
+        });
+
+        new Chart(document.getElementById('detailedChart'), {
+            type: 'bar',
+            data: {
+                labels: aiSystems,
+                datasets: [
+                    {
+                        label: 'Ethical Alignment',
+                        data: ethicalScores,
+                        backgroundColor: '#9b59b6'
+                    },
+                    {
+                        label: 'Cultural Compatibility',
+                        data: culturalScores,
+                        backgroundColor: '#f39c12'
+                    },
+                    {
+                        label: 'Overall Score',
+                        data: overallScores,
+                        backgroundColor: '#1abc9c'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true, max: 100 } }
+            }
+        });
+
+        new Chart(document.getElementById('radarChart'), {
+            type: 'radar',
+            data: {
+                labels: ['Ethical Alignment', 'Cultural Compatibility', 'Overall Score'],
+                datasets: [
+                    {
+                        label: 'HireSmart AI',
+                        data: [36.11, 40.70, 42.50],
+                        borderColor: '#e74c3c',
+                        backgroundColor: '#e74c3c33'
+                    },
+                    {
+                        label: 'MedAssist AI',
+                        data: [64.40, 53.53, 65.71],
+                        borderColor: '#3498db',
+                        backgroundColor: '#3498db33'
+                    },
+                    {
+                        label: 'EduGuide AI',
+                        data: [61.07, 46.33, 60.36],
+                        borderColor: '#2ecc71',
+                        backgroundColor: '#2ecc7133'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: { r: { beginAtZero: true, max: 100 } }
+            }
+        });
+    </script>
+</body>
+</html>
