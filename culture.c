@@ -13,7 +13,6 @@ int load_cultures(const char *filename, Culture *arr, int max) {
     
     char line[512];
     int count=0;
-    
     // skip header
     fgets(line, sizeof(line), fp);
     
