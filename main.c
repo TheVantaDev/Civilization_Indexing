@@ -438,15 +438,15 @@ int main(void) {
 
     // Generate HTML Dashboard
     if (generate_html_dashboard("dashboard.html", systems, ethical_scores, cultural_scores, overall_scores, system_count)) {
-        printf("\n✅ Interactive HTML dashboard generated: dashboard.html\n");
+        printf("\n Interactive HTML dashboard generated: dashboard.html\n");
         printf("   Open this file in your web browser to see interactive charts!\n");
     } else {
-        printf("\n❌ Failed to generate HTML dashboard\n");
+        printf("\n Failed to generate HTML dashboard\n");
     }
 
     // Generate GNUplot script (optional)
     if (generate_gnuplot_script("plot_ethics.gp", systems, overall_scores, system_count)) {
-        printf("✅ GNUplot script generated: plot_ethics.gp\n");
+        printf(" GNUplot script generated: plot_ethics.gp\n");
         printf("   Run: gnuplot plot_ethics.gp (if you have GNUplot installed)\n");
     }
 
