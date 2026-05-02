@@ -129,3 +129,46 @@ record_id,ai_system_id,decision_type,affected_group,outcome,transparency
 128,103,Mental Health Diagnosis,Patients,Balanced,High
 129,101,Traffic Forecasting,Drivers,Approved,Medium
 130,102,Image Classification,Viewers,Rejected,Low
+131,101,Gender Bias,Female Applicants,Rejected,Low
+132,101,Geographic Bias,Rural Districts,Ranked,Low
+133,101,Educational Bias,Non-IIT Colleges,Biased,Low
+134,101,Language Barrier,Non-English Medium,Rejected,Medium
+135,101,Prioritization Error,Tier 2 Cities,Low Priority,Low
+136,102,Unfair Decision,Rural Elderly Patients,Rejected,Low
+137,102,Lack of Transparency,All Patients,Ranked,Low
+138,102,Disproportionate Outcomes,Lower Income Patients,Approved,Low
+139,102,Insufficient Oversight,Doctors and Staff,Reviewed,Medium
+140,102,Undisclosed Risk Index,Private Insurance Holders,Rejected,Low
+141,103,Systemic Recommendation Bias,Low-income Students,Biased,Low
+142,103,Lack of Transparency,Parents and Teachers,No Explanation Given,High
+143,101,Bias in Resume Screening,Female Candidates,Rejected,Low
+144,101,Lack of Transparency in Decision Making,All Candidates,Reviewed,Low
+145,102,Medical Triage Disparity,Rural Elderly Patients,Rejected,Low
+146,102,Treatment Approval Bias,Minority Communities,Biased,Low
+147,102,Private Insurance Penalty,Patients Without Insurance,Rejected,Low
+148,102,Lack of Human Override,All Patients,Biased,Low
+149,102,Undisclosed Risk Index,Urban vs Rural Patients,Ranked,Medium
+150,102,Disproportionate Treatment Denial,Lower Income Patients,Rejected,Low
+151,103,Bias in Recommendations,Minority Communities,Rejected,Low
+152,103,Inequitable Track Assignment,Low-Income Students,Biased,Medium
+153,103,Unfair Program Placement,First-Generation Learners,Ranked,High
+154,103,Lack of Explanation,Parents and Teachers,None,Low
+155,103,Unaudited Recommendation Logic,All Users,Reviewed,Low
+156,101,Gender Bias,Female Candidates,Rejected,Low
+157,101,College Affiliation,IIT Graduates Only,Ranked,Medium
+158,101,Rural Districts,Tier-2 Cities,Biased,Low
+159,101,Non-English Medium Background, Flagged as Low Priority,Biased,Low
+160,101,Resume Screening,Historical Hiring Data Skew,Rejected,High
+161,101,Decision Explanation,No Transparency,Ranked,Low
+162,102,Biased Treatment,Rural Elderly Patients,Rejected,Low
+163,102,Prejudiced Decision,Minority Communities,Rejected,Low
+164,102,Discriminatory Outcome,Patients w/o Private Insurance,Rejected,Low
+165,102,Unfair Approval,Urban Elderly Patients,Approved,Medium
+166,102,Lack of Explanation,Rural Districts Residents,Biased,Low
+167,102,No Human Override,All Patients,Ranked,Low
+168,103,Recommendation Bias,Low-Income Students,Rejected,Low
+169,103,Advanced Track Decision,Minority Communities,Biased,Medium
+170,103,STEM Program Placement,First-Generation Learners,Ranked,High
+171,103,Academic Track Recommendation,Upper-Income Schools,Approved,Medium
+172,103,Vocational vs Honors Track,Government School Students,Balanced,Low
+173,103,Audit and Explanation Transparency,All Users,Low,Low

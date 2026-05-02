@@ -311,11 +311,13 @@ int main(void) {
 
     if (realtime_enabled) {
         printf("Using Ollama model: %s\n", ollama_model);
-        appended_live=append_live_behaviors_from_ollama("ai_behavior.csv", "ai_systems.csv", ollama_model, 8);
-        if (appended_live>0) {
-            printf("Appended %d live behavior rows from Ollama model '%s'.\n", appended_live, ollama_model);
+        print_scenarios();
+        /* Scenario-driven: each AI system gets its own real-world case prompt */
+        appended_live = append_scenario_behaviors("ai_behavior.csv", ollama_model, 6);
+        if (appended_live > 0) {
+            printf("Appended %d scenario-based behavior rows from Ollama.\n", appended_live);
         } else {
-            printf("Realtime mode is on, but no live rows were appended from Ollama.\n");
+            printf("Realtime mode is on, but no scenario rows were appended from Ollama.\n");
         }
     }
 
@@ -476,13 +478,8 @@ int main(void) {
         print_risk_chart(systems[i].system_name, risks, risk_count);
     }
 
-    // Generate HTML Dashboard
-    if (generate_html_dashboard("dashboard.html", systems, ethical_scores, cultural_scores, overall_scores, system_count)) {
-        printf("\n Interactive HTML dashboard generated: dashboard.html\n");
-        printf("   Open this file in your web browser to see interactive charts!\n");
-    } else {
-        printf("\n Failed to generate HTML dashboard\n");
-    }
+    // Generate legacy HTML (basic charts) - does NOT overwrite dashboard.html
+    generate_html_dashboard("dashboard_legacy.html", systems, ethical_scores, cultural_scores, overall_scores, system_count);
 
     // Generate GNUplot script (optional)
     if (generate_gnuplot_script("plot_ethics.gp", systems, overall_scores, system_count)) {
