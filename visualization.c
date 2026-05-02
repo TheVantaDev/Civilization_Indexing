@@ -3,9 +3,9 @@
 #include "types.h"
 
 // ASCII Bar Chart in Terminal
-void print_ascii_chart(const char *title, const char *labels[], const double values[], int count) {
+void print_ascii_chart(char *title, char *labels[], double values[], int count) {
     int i, j;
-    const int max_bar_width = 50;
+    int max_bar_width = 50;
 
     printf("\n%s\n", title);
     printf("=============================================================================\n");
@@ -26,14 +26,14 @@ void print_ascii_chart(const char *title, const char *labels[], const double val
 }
 
 // Multi-series comparison chart
-void print_comparison_chart(const char *title,
-                           const char *ai_names[],
-                           const double ethical[],
-                           const double cultural[],
-                           const double overall[],
+void print_comparison_chart(char *title,
+                           char *ai_names[],
+                           double ethical[],
+                           double cultural[],
+                           double overall[],
                            int count) {
     int i, j;
-    const int max_bar_width = 40;
+    int max_bar_width = 40;
 
     printf("\n%s\n", title);
     printf("=============================================================================\n");
@@ -61,9 +61,9 @@ void print_comparison_chart(const char *title,
 }
 
 // Risk Level Visualization
-void print_risk_chart(const char *ai_name, const RiskSummary risks[], int risk_count) {
+void print_risk_chart(char *ai_name, RiskSummary risks[], int risk_count) {
     int i, j;
-    const int max_bar_width = 50;
+    int max_bar_width = 50;
 
     printf("\n%s - Risk Assessment\n", ai_name);
     printf("=============================================================================\n");
@@ -90,11 +90,11 @@ void print_risk_chart(const char *ai_name, const RiskSummary risks[], int risk_c
 }
 
 // Generate HTML Dashboard with Chart.js
-int generate_html_dashboard(const char *filename,
-                           const AISystem *systems,
-                           const double ethical[],
-                           const double cultural[],
-                           const double overall[],
+int generate_html_dashboard(char *filename,
+                           AISystem *systems,
+                           double ethical[],
+                           double cultural[],
+                           double overall[],
                            int system_count) {
     FILE *fp = fopen(filename, "w");
     int i;
@@ -214,7 +214,7 @@ int generate_html_dashboard(const char *filename,
     fprintf(fp, "                labels: ['Ethical Alignment', 'Cultural Compatibility', 'Overall Score'],\n");
     fprintf(fp, "                datasets: [\n");
     for (i = 0; i < system_count; i++) {
-        const char *colors[] = {"#e74c3c", "#3498db", "#2ecc71"};
+        char *colors[] = {"#e74c3c", "#3498db", "#2ecc71"};
         fprintf(fp, "                    {\n");
         fprintf(fp, "                        label: '%s',\n", systems[i].system_name);
         fprintf(fp, "                        data: [%.2f, %.2f, %.2f],\n",
@@ -239,9 +239,9 @@ int generate_html_dashboard(const char *filename,
 }
 
 // Generate GNUplot script
-int generate_gnuplot_script(const char *filename,
-                            const AISystem *systems,
-                            const double scores[],
+int generate_gnuplot_script(char *filename,
+                            AISystem *systems,
+                            double scores[],
                             int system_count) {
     FILE *fp = fopen(filename, "w");
     int i;
