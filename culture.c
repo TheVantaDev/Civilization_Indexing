@@ -4,7 +4,7 @@
 #include "types.h"
 
 // Load cultures from CSV file into array
-int load_cultures(const char *filename, Culture *arr, int max) {
+int load_cultures(char *filename, Culture *arr, int max) {
     FILE *fp=fopen(filename, "r");
     if (!fp) {
         perror("Failed to open culture.csv");

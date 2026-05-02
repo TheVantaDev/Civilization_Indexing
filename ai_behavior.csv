@@ -89,3 +89,43 @@ record_id,ai_system_id,decision_type,affected_group,outcome,transparency
 88,103,College major recommendation,High school seniors,Personalized,High
 89,103,Financial aid eligibility,Low income families,Fair,Medium
 90,103,Summer program matching,At-risk students,Inclusive,High
+91,101,Approved,Customers,Ranked,High
+92,102,Biased,Employees,Rejected,Medium
+93,103,Balanced,Suppliers,Approved,Low
+94,101,Reviewed,Patrons,Biased,Medium
+95,102,Approved,Visitors,Balanced,High
+96,103,Rejected,Residents,Ranked,Low
+97,101,Biased,Clients,Biased,Medium
+98,102,Balanced,Users,Approved,High
+99,101,Loan Application Denied,High-Risk Borrowers,Rejected,Medium
+100,102,Job Interview Scheduling,Diverse Candidate Pool,Approved,High
+101,103,Credit Score Calculation,Young Adults Only,Ranked,Low
+102,101,Personalized Advertising,Sensitive User Info,Biased,Medium
+103,102,Medical Diagnosis System,Rare Disease Patients,Reviewed,High
+104,103,Traffic Flow Management,Heavy Traffic Zones,Balanced,Medium
+105,101,Social Media Censorship,Hate Speech Detectors,Rejected,Low
+106,102,Predictive Maintenance,Equipment Manufacturers Only,Approved,High
+107,101,Loan Approval,Minority Group,Rejected,Medium
+108,102,Job Offer,Low-Skilled Worker,RANKED,High
+109,103,Credit Score,Veteran,APPROVED,Low
+110,101,Medical Diagnosis,Neurologist REVIEWED,Balanced,Medium
+111,102,Mortgage Decision,First-Time Buyer REJECTED,Biased,High
+112,103,Customer Support,Senior Citizen APPLIED,Approved,Medium
+113,101,Traffic Flow Prediction,Rush Hour DRIVER,Ranked,Low
+114,102,Financial Forecast,Market Trend ANOMALY,Rejected,High
+115,101,Credit Check,High-Risk Clients,Approved,Medium
+116,102,Job Matching,Low-Skilled Workers,Rejected,Low
+117,103,Image Recognition,Diverse Faces,Ranked,High
+118,101,Chatbot Response,Sensitive Users,Biased,Low
+119,102,Predictive Maintenance,Maintenance Staff,Balanced,Medium
+120,103,Customer Service,Abusive Customers,Reviewed,High
+121,101,Medical Diagnosis,Critical Patients,Approved,Medium
+122,102,Security Threats,System Administrators,Ranked,High
+123,101,Loan Approval,Homebuyers,Approved,Medium
+124,102,Job Matching,Applicants,Ranked,Low
+125,103,Product Recommendation,Shoppers,Rejected,High
+126,101,Credit Scoring,Borrowers,Biased,Medium
+127,102,Resume Screening,Applicants,Reviewed,Low
+128,103,Mental Health Diagnosis,Patients,Balanced,High
+129,101,Traffic Forecasting,Drivers,Approved,Medium
+130,102,Image Classification,Viewers,Rejected,Low
