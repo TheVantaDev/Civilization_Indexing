@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS ai_behavior (
     affected_group VARCHAR(128) NOT NULL,
     outcome        VARCHAR(128) NOT NULL,
     transparency   ENUM('Low','Medium','High') NOT NULL,
-    source         ENUM('csv','ollama') NOT NULL DEFAULT 'csv',
+    source         ENUM('csv','ollama','ollama_scenario') NOT NULL DEFAULT 'csv',
     created_at     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (record_id),
     INDEX idx_ai_id (ai_system_id)

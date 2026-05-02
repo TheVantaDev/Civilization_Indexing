@@ -1,111 +1,325 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>AI Civilization Ethics Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
-        h1 { color: #333; text-align: center; }
-        .chart-container { width: 80%; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .legend { text-align: center; margin: 10px; font-size: 14px; color: #666; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Civilisation Ethics Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#040d1a;--card:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.07);
+  --p1:#818cf8;--p2:#38bdf8;--p3:#34d399;--p4:#fb923c;--p5:#f87171;
+  --text:#e2e8f0;--muted:#64748b;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 90% 60% at 15% 0%,rgba(99,102,241,.13) 0%,transparent 55%),
+             radial-gradient(ellipse 70% 50% at 85% 90%,rgba(6,182,212,.10) 0%,transparent 55%),
+             radial-gradient(ellipse 60% 80% at 50% 50%,rgba(16,185,129,.05) 0%,transparent 60%)}
+#app{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:36px 28px}
+
+/* ── Loading ── */
+#loading{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
+.spin{width:52px;height:52px;border-radius:50%;border:3px solid rgba(129,140,248,.15);border-top-color:#818cf8;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loading p{color:var(--muted);font-size:.9rem;letter-spacing:.05em}
+
+/* ── Header ── */
+.hdr{text-align:center;margin-bottom:52px}
+.hdr h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;letter-spacing:-2px;line-height:1.1;
+  background:linear-gradient(135deg,#a5b4fc 0%,#67e8f9 45%,#6ee7b7 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px}
+.hdr p{color:var(--muted);font-size:1rem}
+.hdr .ts{display:inline-flex;align-items:center;gap:8px;margin-top:18px;
+  background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.25);
+  border-radius:999px;padding:7px 18px;font-size:.78rem;color:#a5b4fc}
+.dot{width:7px;height:7px;border-radius:50%;background:#818cf8;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+.rbtn{display:inline-flex;align-items:center;gap:8px;margin-top:18px;margin-left:12px;
+  padding:9px 22px;border-radius:999px;border:none;cursor:pointer;font-size:.82rem;font-weight:700;
+  background:linear-gradient(135deg,#6366f1,#06b6d4);color:#fff;
+  box-shadow:0 4px 20px rgba(99,102,241,.4);transition:all .3s}
+.rbtn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(99,102,241,.55)}
+.rbtn svg{width:15px;height:15px}
+
+/* ── Scenario pills ── */
+.sc-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:44px;justify-content:center}
+.sc-pill{background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:14px 20px;flex:1;min-width:240px;max-width:380px;backdrop-filter:blur(20px);
+  transition:transform .3s,box-shadow .3s}
+.sc-pill:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.sc-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--p1);margin-bottom:6px}
+.sc-name{font-size:.88rem;font-weight:600;color:var(--text);line-height:1.4}
+
+/* ── KPI Grid ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:44px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:26px 22px;backdrop-filter:blur(20px);transition:transform .3s,box-shadow .3s;
+  animation:up .5s ease both}
+.kpi:hover{transform:translateY(-4px);box-shadow:0 0 40px rgba(99,102,241,.12)}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.kpi-lbl{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.kpi-val{font-size:2.5rem;font-weight:900;line-height:1;margin-bottom:6px}
+.kpi-sub{font-size:.77rem;color:var(--muted)}
+.kpi-bar{height:3px;background:rgba(255,255,255,0.05);border-radius:3px;margin-top:16px;overflow:hidden}
+.kpi-fill{height:100%;border-radius:3px;transition:width 1.4s cubic-bezier(.4,0,.2,1)}
+
+/* ── Section title ── */
+.stitle{font-size:1.15rem;font-weight:700;display:flex;align-items:center;gap:10px;margin-bottom:20px}
+
+/* ── Chart grid ── */
+.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:22px;margin-bottom:44px}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:28px;backdrop-filter:blur(20px);animation:up .6s ease both}
+.chart-card.full{grid-column:1/-1}
+.cw{position:relative;height:300px}
+.cw-tall{position:relative;height:340px}
+
+/* ── Tabs ── */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{padding:8px 18px;border-radius:999px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);cursor:pointer;font-size:.8rem;font-weight:600;transition:all .2s}
+.tab.on{background:var(--p1);border-color:var(--p1);color:#fff;box-shadow:0 4px 16px rgba(129,140,248,.4)}
+.pane{display:none}.pane.on{display:block}
+.tcard{background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:24px;backdrop-filter:blur(20px);overflow:auto;animation:up .5s ease both}
+table{width:100%;border-collapse:collapse;font-size:.83rem}
+thead th{text-align:left;font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--border)}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.03);transition:background .2s}
+tbody tr:last-child{border:none}
+tbody tr:hover{background:rgba(255,255,255,.03)}
+td{padding:11px 12px}
+
+/* ── Pills ── */
+.ph{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.68rem;font-weight:700}
+.ph-H{background:rgba(248,113,113,.12);color:#fca5a5;border:1px solid rgba(248,113,113,.3)}
+.ph-M{background:rgba(251,146,60,.12);color:#fdba74;border:1px solid rgba(251,146,60,.3)}
+.ph-L{background:rgba(52,211,153,.12);color:#6ee7b7;border:1px solid rgba(52,211,153,.3)}
+
+/* ── Score bar ── */
+.sb{display:flex;align-items:center;gap:8px}
+.st{flex:1;height:6px;background:rgba(255,255,255,.05);border-radius:6px;overflow:hidden}
+.sf{height:100%;border-radius:6px;transition:width 1.1s ease}
+.sv{width:44px;text-align:right;font-variant-numeric:tabular-nums;font-size:.82rem}
+</style>
 </head>
 <body>
-    <h1>🌍 AI Civilization Ethics Dashboard</h1>
-    <div class="chart-container">
-        <h2>Overall Ethical Scores Comparison</h2>
-        <canvas id="overallChart"></canvas>
-    </div>
-    <div class="chart-container">
-        <h2>Detailed Ethical Metrics</h2>
-        <canvas id="detailedChart"></canvas>
-    </div>
-    <div class="chart-container">
-        <h2>Multi-dimensional Ethics Profile</h2>
-        <canvas id="radarChart"></canvas>
-    </div>
-    <script>
-        const aiSystems = ['HireSmart AI', 'MedAssist AI', 'EduGuide AI'];
-        const ethicalScores = [44.65, 60.62, 60.53];
-        const culturalScores = [36.39, 47.25, 46.71];
-        const overallScores = [40.83, 59.15, 60.26];
 
-        new Chart(document.getElementById('overallChart'), {
-            type: 'bar',
-            data: {
-                labels: aiSystems,
-                datasets: [{
-                    label: 'Overall Ethical Score (%)',
-                    data: overallScores,
-                    backgroundColor: ['#e74c3c', '#3498db', '#2ecc71'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: { y: { beginAtZero: true, max: 100 } }
-            }
-        });
+<div id="loading"><div class="spin"></div><p>LOADING ANALYSIS…</p></div>
 
-        new Chart(document.getElementById('detailedChart'), {
-            type: 'bar',
-            data: {
-                labels: aiSystems,
-                datasets: [
-                    {
-                        label: 'Ethical Alignment',
-                        data: ethicalScores,
-                        backgroundColor: '#9b59b6'
-                    },
-                    {
-                        label: 'Cultural Compatibility',
-                        data: culturalScores,
-                        backgroundColor: '#f39c12'
-                    },
-                    {
-                        label: 'Overall Score',
-                        data: overallScores,
-                        backgroundColor: '#1abc9c'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: { y: { beginAtZero: true, max: 100 } }
-            }
-        });
+<div id="app" style="display:none">
+<div class="hdr">
+  <h1>🌍 AI Civilisation<br>Ethics Dashboard</h1>
+  <p>Real-time Ethical Indexing · Scenario-Driven Ollama · MySQL Persistence</p>
+  <div style="display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;margin-top:16px">
+    <div class="ts"><span class="dot"></span><span id="ts">—</span></div>
+    <button class="rbtn" id="rbtn" onclick="load()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+      Refresh
+    </button>
+  </div>
+</div>
 
-        new Chart(document.getElementById('radarChart'), {
-            type: 'radar',
-            data: {
-                labels: ['Ethical Alignment', 'Cultural Compatibility', 'Overall Score'],
-                datasets: [
-                    {
-                        label: 'HireSmart AI',
-                        data: [44.65, 36.39, 40.83],
-                        borderColor: '#e74c3c',
-                        backgroundColor: '#e74c3c33'
-                    },
-                    {
-                        label: 'MedAssist AI',
-                        data: [60.62, 47.25, 59.15],
-                        borderColor: '#3498db',
-                        backgroundColor: '#3498db33'
-                    },
-                    {
-                        label: 'EduGuide AI',
-                        data: [60.53, 46.71, 60.26],
-                        borderColor: '#2ecc71',
-                        backgroundColor: '#2ecc7133'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: { r: { beginAtZero: true, max: 100 } }
-            }
-        });
-    </script>
+<div class="sc-row" id="sc-row"></div>
+<div class="kpi-grid" id="kpi-grid"></div>
+
+<div class="stitle"><span>📊</span> Comparative Analysis</div>
+<div class="chart-grid">
+  <div class="chart-card full"><div class="stitle" style="font-size:.95rem"><span>🏆</span> Overall Scores — Ethical · Cultural · Overall</div><div class="cw"><canvas id="cBar"></canvas></div></div>
+  <div class="chart-card"><div class="stitle" style="font-size:.95rem"><span>🕸</span> Multi-Dimensional Radar</div><div class="cw"><canvas id="cRadar"></canvas></div></div>
+  <div class="chart-card"><div class="stitle" style="font-size:.95rem"><span>⚠️</span> Risk Distribution</div><div class="cw"><canvas id="cRisk"></canvas></div></div>
+  <div class="chart-card full"><div class="stitle" style="font-size:.95rem"><span>🌐</span> Cultural Compatibility by Region</div><div class="cw-tall"><canvas id="cCulture"></canvas></div></div>
+  <div class="chart-card full"><div class="stitle" style="font-size:.95rem"><span>⚡</span> Principle-Level Alignment Heatmap</div><div class="cw-tall"><canvas id="cPrinciple"></canvas></div></div>
+</div>
+
+<div class="stitle"><span>📋</span> Detailed Data</div>
+<div class="tabs">
+  <button class="tab on" onclick="tab(event,'final')">Final Index</button>
+  <button class="tab" onclick="tab(event,'dash')">Dashboard KPIs</button>
+  <button class="tab" onclick="tab(event,'score')">Principle Scoring</button>
+  <button class="tab" onclick="tab(event,'cult')">Cultural Compat.</button>
+  <button class="tab" onclick="tab(event,'risk')">Risk Detection</button>
+</div>
+<div class="tcard">
+  <div class="pane on" id="pane-final"></div>
+  <div class="pane" id="pane-dash"></div>
+  <div class="pane" id="pane-score"></div>
+  <div class="pane" id="pane-cult"></div>
+  <div class="pane" id="pane-risk"></div>
+</div>
+</div>
+
+<script>
+const PAL=['#818cf8','#38bdf8','#34d399','#fb923c','#f87171','#c084fc','#f472b6'];
+const PALN=['rgba(129,140,248,.2)','rgba(56,189,248,.2)','rgba(52,211,153,.2)'];
+let D={},charts={};
+const pct=v=>(v*100).toFixed(1)+'%';
+const pill=l=>`<span class="ph ph-${l[0]}">${l}</span>`;
+function sb(v,c){return`<div class="sb"><span class="sv">${pct(v)}</span><div class="st"><div class="sf" style="width:${pct(v)};background:${c}"></div></div></div>`}
+
+function tab(e,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  e.target.classList.add('on');
+  document.getElementById('pane-'+id).classList.add('on');
+}
+
+function killCharts(){Object.values(charts).forEach(c=>c.destroy());charts={}}
+
+const base={animation:{duration:900,easing:'easeOutQuart'},
+  plugins:{legend:{labels:{color:'#94a3b8',font:{family:'Inter',size:12}}}}};
+const grid={color:'rgba(255,255,255,.05)',drawBorder:false};
+const tick={color:'#64748b',font:{family:'Inter',size:11}};
+
+function buildCharts(){
+  const fi=D.final_index, db=D.dashboard, cc=D.cultural_compatibility;
+  const names=fi.map(r=>r.system_name);
+
+  // Bar
+  charts.bar=new Chart(document.getElementById('cBar'),{type:'bar',
+    data:{labels:names,datasets:[
+      {label:'Ethical Alignment',data:fi.map(r=>+(r.ethical_alignment*100).toFixed(1)),backgroundColor:PAL[0]+'cc',borderRadius:8,borderSkipped:false},
+      {label:'Cultural Compat.',data:fi.map(r=>+(r.cultural_compatibility*100).toFixed(1)),backgroundColor:PAL[1]+'cc',borderRadius:8,borderSkipped:false},
+      {label:'Overall Score',data:fi.map(r=>+(r.overall_score*100).toFixed(1)),backgroundColor:PAL[2]+'cc',borderRadius:8,borderSkipped:false}
+    ]},
+    options:{...base,responsive:true,maintainAspectRatio:false,
+      scales:{x:{grid,ticks:tick},y:{grid,ticks:{...tick,callback:v=>v+'%'},max:100,beginAtZero:true}}}
+  });
+
+  // Radar
+  charts.radar=new Chart(document.getElementById('cRadar'),{type:'radar',
+    data:{labels:['Ethical Align','Cultural Compat','Overall Score','Projected'],
+      datasets:db.map((r,i)=>({label:r.system_name,
+        data:[+(r.ethical_alignment*100).toFixed(1),+(r.cultural_compatibility*100).toFixed(1),
+              +(fi.find(x=>x.system_name===r.system_name)?.overall_score*100||0).toFixed(1),
+              +(r.projected_ethical_score*100).toFixed(1)],
+        borderColor:PAL[i],backgroundColor:PALN[i]||'rgba(255,255,255,.04)',borderWidth:2,pointRadius:4}))},
+    options:{...base,responsive:true,maintainAspectRatio:false,
+      scales:{r:{grid:{color:'rgba(255,255,255,.07)'},angleLines:{color:'rgba(255,255,255,.07)'},
+        ticks:{backdropColor:'transparent',color:'#64748b',font:{size:10}},
+        pointLabels:{color:'#94a3b8',font:{size:12}},min:0,max:100}}}
+  });
+
+  // Doughnut risk
+  const rc={High:0,Medium:0,Low:0};
+  D.risk_detection.forEach(r=>{rc[r.risk_level]=(rc[r.risk_level]||0)+1});
+  charts.risk=new Chart(document.getElementById('cRisk'),{type:'doughnut',
+    data:{labels:['High','Medium','Low'],
+      datasets:[{data:[rc.High,rc.Medium,rc.Low],
+        backgroundColor:['rgba(248,113,113,.7)','rgba(251,146,60,.7)','rgba(52,211,153,.7)'],
+        borderColor:['#f87171','#fb923c','#34d399'],borderWidth:2,hoverOffset:10}]},
+    options:{...base,responsive:true,maintainAspectRatio:false,cutout:'65%',
+      plugins:{...base.plugins,legend:{position:'bottom',labels:{color:'#94a3b8',padding:16}}}}
+  });
+
+  // Cultural grouped
+  const regions=[...new Set(cc.map(r=>r.region))];
+  charts.cult=new Chart(document.getElementById('cCulture'),{type:'bar',
+    data:{labels:regions,
+      datasets:names.map((sys,i)=>({label:sys,borderRadius:6,backgroundColor:PAL[i]+'bb',
+        data:regions.map(reg=>{const row=cc.find(r=>r.system_name===sys&&r.region===reg);return row?+(row.compatibility_score*100).toFixed(1):0})}))},
+    options:{...base,responsive:true,maintainAspectRatio:false,
+      scales:{x:{grid,ticks:tick},y:{grid,ticks:{...tick,callback:v=>v+'%'},max:100,beginAtZero:true}}}
+  });
+
+  // Principle heatmap (horizontal bar)
+  const sc=D.intermediate_scoring;
+  const principles=[...new Set(sc.map(r=>r.ethical_principle))];
+  charts.principle=new Chart(document.getElementById('cPrinciple'),{type:'bar',
+    data:{labels:principles,
+      datasets:names.map((sys,i)=>({label:sys,borderRadius:5,backgroundColor:PAL[i]+'bb',
+        data:principles.map(p=>{const row=sc.find(r=>r.system_name===sys&&r.ethical_principle===p);return row?+(row.alignment_score*100).toFixed(1):0})}))},
+    options:{...base,responsive:true,maintainAspectRatio:false,indexAxis:'y',
+      scales:{x:{grid,ticks:{...tick,callback:v=>v+'%'},max:100,beginAtZero:true},y:{grid,ticks:{...tick,font:{size:11}}}}}
+  });
+}
+
+function buildKPIs(){
+  const fi=D.final_index;
+  const avgO=fi.reduce((s,r)=>s+r.overall_score,0)/fi.length;
+  const avgE=fi.reduce((s,r)=>s+r.ethical_alignment,0)/fi.length;
+  const avgC=fi.reduce((s,r)=>s+r.cultural_compatibility,0)/fi.length;
+  const hR=D.risk_detection.filter(r=>r.risk_level==='High').length;
+  const cards=[
+    {l:'AI Systems',v:D.systems.length,s:'Being evaluated',bar:D.systems.length/10,c:PAL[0]},
+    {l:'Avg Overall Score',v:pct(avgO),s:'Civilisation index',bar:avgO,c:PAL[1]},
+    {l:'Avg Ethical Align',v:pct(avgE),s:'Principle adherence',bar:avgE,c:PAL[0]},
+    {l:'Avg Cultural Fit',v:pct(avgC),s:'Cross-cultural score',bar:avgC,c:PAL[2]},
+    {l:'High Risk Flags',v:hR,s:'Need intervention',bar:hR/Math.max(D.risk_detection.length,1),c:PAL[4]},
+    {l:'Behavior Records',v:D.intermediate_scoring.length,s:'Total evaluations',bar:.5,c:PAL[3]},
+  ];
+  document.getElementById('kpi-grid').innerHTML=cards.map((c,i)=>`
+    <div class="kpi" style="animation-delay:${i*.06}s">
+      <div class="kpi-lbl">${c.l}</div>
+      <div class="kpi-val" style="background:linear-gradient(135deg,${c.c},${PAL[(i+1)%PAL.length]});-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${c.v}</div>
+      <div class="kpi-sub">${c.s}</div>
+      <div class="kpi-bar"><div class="kpi-fill" style="width:${Math.min(c.bar*100,100)}%;background:linear-gradient(90deg,${c.c},${PAL[(i+1)%PAL.length]})"></div></div>
+    </div>`).join('');
+}
+
+function buildScenarios(){
+  const names={101:'HireSmart AI — Tech Hiring Discrimination',102:'MedAssist AI — Rural Healthcare Inequality',103:'EduGuide AI — Socioeconomic Educational Bias'};
+  document.getElementById('sc-row').innerHTML=D.systems.map((s,i)=>`
+    <div class="sc-pill" style="border-color:${PAL[i]}33">
+      <div class="sc-label" style="color:${PAL[i]}">AI System ${s.ai_system_id}</div>
+      <div class="sc-name">${names[s.ai_system_id]||s.system_name}</div>
+      <div style="margin-top:8px;font-size:.75rem;color:var(--muted)">${s.application_domain} · ${s.deployment_region}</div>
+    </div>`).join('');
+}
+
+function buildTables(){
+  const fi=D.final_index;
+  document.getElementById('pane-final').innerHTML=`<table><thead><tr><th>System</th><th>Ethical Align</th><th>Cultural Compat</th><th>Risk</th><th>Overall Score</th></tr></thead><tbody>`+
+    fi.map(r=>`<tr><td><strong>${r.system_name}</strong></td><td>${sb(r.ethical_alignment,PAL[0])}</td><td>${sb(r.cultural_compatibility,PAL[1])}</td><td>${pill(r.risk_level)}</td><td>${sb(r.overall_score,PAL[2])}</td></tr>`).join('')+`</tbody></table>`;
+
+  document.getElementById('pane-dash').innerHTML=`<table><thead><tr><th>System</th><th>Ethical</th><th>Cultural</th><th>Risk</th><th>Global Rank</th><th>Projected</th></tr></thead><tbody>`+
+    D.dashboard.map(r=>`<tr><td><strong>${r.system_name}</strong></td><td>${sb(r.ethical_alignment,PAL[0])}</td><td>${sb(r.cultural_compatibility,PAL[1])}</td><td>${pill(r.risk_level)}</td><td><span style="font-size:1.1rem;font-weight:800;color:${PAL[0]}">${r.global_ethics_rank}/100</span></td><td>${sb(r.projected_ethical_score,PAL[2])}</td></tr>`).join('')+`</tbody></table>`;
+
+  document.getElementById('pane-score').innerHTML=`<table><thead><tr><th>System</th><th>Ethical Principle</th><th>Alignment Score</th></tr></thead><tbody>`+
+    D.intermediate_scoring.map(r=>`<tr><td>${r.system_name}</td><td style="color:${PAL[0]};font-weight:500">${r.ethical_principle}</td><td>${sb(r.alignment_score,PAL[0])}</td></tr>`).join('')+`</tbody></table>`;
+
+  document.getElementById('pane-cult').innerHTML=`<table><thead><tr><th>System</th><th>Region</th><th>Compatibility</th></tr></thead><tbody>`+
+    D.cultural_compatibility.map(r=>`<tr><td>${r.system_name}</td><td style="color:${PAL[1]}">${r.region}</td><td>${sb(r.compatibility_score,PAL[1])}</td></tr>`).join('')+`</tbody></table>`;
+
+  document.getElementById('pane-risk').innerHTML=`<table><thead><tr><th>System</th><th>Risk Category</th><th>Level</th><th>Score</th></tr></thead><tbody>`+
+    D.risk_detection.map(r=>`<tr><td>${r.system_name}</td><td>${r.risk_category}</td><td>${pill(r.risk_level)}</td><td>${sb(r.risk_score,r.risk_level==='High'?PAL[4]:r.risk_level==='Medium'?PAL[3]:PAL[2])}</td></tr>`).join('')+`</tbody></table>`;
+}
+
+async function load(){
+  document.getElementById('loading').style.display='flex';
+  document.getElementById('app').style.display='none';
+  try{
+    const r=await fetch('data.json?_='+Date.now());
+    if(!r.ok)throw new Error(r.status);
+    D=await r.json();
+    document.getElementById('ts').textContent='Last run: '+new Date().toLocaleString();
+    killCharts();
+    buildKPIs();
+    buildScenarios();
+    buildCharts();
+    buildTables();
+    document.getElementById('loading').style.display='none';
+    document.getElementById('app').style.display='block';
+  }catch(e){
+    document.getElementById('loading').innerHTML=`
+      <div style="text-align:center;padding:48px">
+        <div style="font-size:3.5rem;margin-bottom:20px">⚠️</div>
+        <h2 style="color:#f87171;margin-bottom:14px;font-size:1.4rem">data.json not found</h2>
+        <p style="color:var(--muted);max-width:380px;line-height:1.7">Run the C program first to generate analysis data:</p>
+        <code style="display:inline-block;margin-top:16px;padding:10px 24px;background:rgba(255,255,255,.06);border-radius:10px;color:${PAL[0]};font-size:.9rem">ai_civilization.exe</code>
+        <br><button class="rbtn" onclick="load()" style="margin-top:24px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+          Retry
+        </button>
+      </div>`;
+    console.error(e);
+  }
+}
+load();
+</script>
 </body>
 </html>

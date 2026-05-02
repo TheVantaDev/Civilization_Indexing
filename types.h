@@ -89,6 +89,12 @@ void print_risk_chart(char *ai_name, RiskSummary risks[], int risk_count);
 int generate_html_dashboard(char *filename, AISystem *systems, double ethical[], double cultural[], double overall[], int system_count);
 int generate_gnuplot_script(char *filename, AISystem *systems, double scores[], int system_count);
 
+// Scenario-driven Ollama behavior generation
+int  append_scenario_behaviors(const char *behavior_csv,
+                               const char *model,
+                               int rows_per_scenario);
+void print_scenarios(void);
+
 // JSON export (feeds the HTML dashboard)
 int export_all_to_json(const char *filename,
                        PrincipleNode *root,
