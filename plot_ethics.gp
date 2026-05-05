@@ -9,7 +9,7 @@ set boxwidth 0.9
 set xtic rotate by -45 scale 0
 set yrange [0:100]
 plot '-' using 2:xtic(1) title 'Overall Score' linecolor rgb '#3498db'
-'HireSmart AI' 37
-'MedAssist AI' 38
-'EduGuide AI' 53
+'HireSmart AI' 34
+'MedAssist AI' 36
+'EduGuide AI' 46
 e
