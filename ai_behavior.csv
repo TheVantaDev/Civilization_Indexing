@@ -172,3 +172,52 @@ record_id,ai_system_id,decision_type,affected_group,outcome,transparency
 171,103,Academic Track Recommendation,Upper-Income Schools,Approved,Medium
 172,103,Vocational vs Honors Track,Government School Students,Balanced,Low
 173,103,Audit and Explanation Transparency,All Users,Low,Low
+174,101,Gender Bias Detected,Female Applicants,Rejected,Low
+175,101,Background Discrimination,Non-English Medium Backgrounds,Biased,Medium
+176,101,Regional Favoritism,Rural District Candidates,Ranked,High
+177,101,Education Bias,Tier-2 City Graduates,Rejected,Low
+178,101,Prioritization Error,Brand-Name College Applicants,Approved,Medium
+179,101,Decision Lacking Transparency,All Affected Groups,Reviewed,Low
+180,102,Biased Decision,Rural Elderly Patients,Rejected,Low
+181,102,Disproportionate Approval,Urban Patients,Approved,High
+182,102,Penalizing Minority,Low-Income Patients,Rejected,Medium
+183,102,Lack of Transparency,All Patients,Ranked,Low
+184,102,Inadequate Oversight,Private Insurance Holders,Approved,High
+185,102,Bias in Treatment Plan,Elderly Rural Communities,Biased,Low
+186,103,Recommendation Bias,Low-Income Students,Rejected,Low
+187,103,Track Placement Disparity,Minority Communities,Rejected,Medium
+188,103,Audit Lack Transparency,All Affected,Biased,Low
+189,103,Grade-Based Tracking Issue,First-Generation Learners,Ranked,High
+190,103,Systemic Recommendation Problem,Wealthy Backgrounds,Approved,Low
+191,103,Lack of Explanation Transparency,Parents and Teachers,None,Low
+192,101,Biased Decision-Making,Female Applicants,Rejected,Low
+193,101,Disparate Impact,Non-English-Medium Backgrounds,Ranked,Medium
+194,101,Gender Bias,Women Candidates,Approved,High
+195,101,Historical Injustice,Rural District Residents,Ranked,Low
+196,101,Implicit Bias,Tier-2 City Dwellers,Biased,Medium
+197,101,Lack of Transparency,All Applicants,Reviewed,Low
+198,102,Disproportionate Rejection,Elderly Rural Patients,Rejected,Low
+199,102,Biased Approval,Urban Privileged Patients,Approved,Medium
+200,102,Penalizing Treatment,Low Income Individuals,Rejected,Low
+201,102,Systemic Disparagement,Rural Districts Minority Groups,Biased,High
+202,102,Lack of Human Override,Attending Physicians,Reviewed,Low
+203,102,Undisclosed Risk Index,Mistrust in AI Decisions,Balanced,Low
+204,103,Bias in Recommendations,Low-Income Students,Rejected,Low
+205,103,Tracking and Routing,Minority Communities,Biased,Medium
+206,103,Discriminatory Logic,First-Generation Learners,Ranked,Low
+207,103,Lack of Explanation,Parents and Teachers,None Provided,High
+208,103,Inequitable Access,Upper-Income Schools,Approved,Low
+209,103,Auditing and Oversight,Education Researchers,Reviewed,Medium
+210,101,Discriminatory Decision,Female Applicants,Rejected,Low
+211,101,Biased Screening,Tier-2 City Candidates,Ranked,Low
+212,101,Gender-Based Rejection,Women in Tech,Rejected,Medium
+213,101,Undue Preference,IIT College Graduates,Approved,High
+214,101,Systemic Injustice,Rural District Residents,Rejected,Low
+215,101,Lack of Diversity,Non-English-Medium Backgrounds,Ranked,Low
+216,102,Biased Outcome,Elderly Rural Patients,Rejected,Low
+217,102,Unfair Treatment,Low-Income Patients,Ranked Over Others,Medium
+218,102,No Human Override,Private Insurance Status,Biased Rejected Outcome,Low
+219,103,Recommendation Bias,Low-Income Students,Biased,Low
+220,103,Program Recommendation,Minority Communities,Rejected,Medium
+221,103,Track Placement,Upper-Income Schools,Approved,High
+222,103,Grade-Based Tracking,First-Generation Learners,Ranked,Low
